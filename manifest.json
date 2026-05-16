@@ -1,0 +1,56 @@
+{
+    "manifest_version": 3,
+    "name": "Instagram DM Chat Extractor",
+    "version": "1.0.0",
+    "description": "Extract Instagram DM conversations as JSON, Markdown, and HTML",
+    "permissions": [
+        "activeTab",
+        "scripting"
+    ],
+    "host_permissions": [
+        "https://www.instagram.com/*"
+    ],
+    "background": {
+        "service_worker": "background.js"
+    },
+    "web_accessible_resources": [
+        {
+            "resources": [
+                "template/*.html"
+            ],
+            "matches": [
+                "<all_urls>"
+            ]
+        }
+    ],
+    "action": {
+        "default_popup": "popup/popup.html",
+        "default_icon": {
+            "16": "icons/icon16.png",
+            "48": "icons/icon48.png",
+            "128": "icons/icon128.png"
+        }
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "https://www.instagram.com/*"
+            ],
+            "js": [
+                "content/parser.js",
+                "content/markdown.js",
+                "content/downloader.js",
+                "content/stats.js",
+                "content/extractor.js",
+                "content/html.js",
+                "content/content.js"
+            ],
+            "run_at": "document_idle"
+        }
+    ],
+    "icons": {
+        "16": "icons/icon16.png",
+        "48": "icons/icon48.png",
+        "128": "icons/icon128.png"
+    }
+}
